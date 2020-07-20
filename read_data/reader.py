@@ -4,13 +4,14 @@ pd.options.display.max_columns = 25
 pd.options.display.width = 2500
 
 from recommendations_with_IBM.processing import common as cm
+from recommendations_with_IBM.info import paths
 
 
 
 class UserList():
     def __init__(self, reduced=False):
         """ Set reduced = True to get a subsample of the dataset to test functions """
-        self.file = 'data/user-item-interactions.csv'
+        self.file = paths.users_path
         self.df = self._load_data(reduced=reduced)
         self.article_dict = self.df.drop_duplicates()[['article_id',
                                                        'title']].set_index('article_id').to_dict()['title']
@@ -317,6 +318,6 @@ class UserList():
 
 # class ArticleList():
 #     def __init__(self):
-#         self.file = 'data/articles_community.csv'
+#         self.file = paths.articles_path
 #         self.df = pd.read_csv(self.file, index_col=0)
 #
