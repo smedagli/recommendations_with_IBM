@@ -1,0 +1,56 @@
+Folder PATH listing for volume Boot
+Volume serial number is 00000247 DC44:7F00
+C:.
+|   .gitignore
+|   README.md
+|   
++---.idea
+|   |   .gitignore
+|   |   misc.xml
+|   |   modules.xml
+|   |   recommendations_with_IBM.iml
+|   |   vcs.xml
+|   |   workspace.xml
+|   |   
+|   \---inspectionProfiles
+|           profiles_settings.xml
+|           
++---analysis
+|       users.py
+|       __init__.py
+|       
++---data
+|       articles_community.csv
+|       user-item-interactions.csv
+|       
++---info
+|       paths.py
+|       tree.txt
+|       version.py
+|       __init__.py
+|       
++---processing
+|   |   common.py
+|   |   __init__.py
+|   |   
+|   \---__pycache__
+|           common.cpython-37.pyc
+|           __init__.cpython-37.pyc
+|           
++---read_data
+|   |   reader.py
+|   |   __init__.py
+|   |   
+|   \---__pycache__
+|           reader.cpython-37.pyc
+|           __init__.cpython-37.pyc
+|           
++---recommendations
+|       collaborative.py
+|       matrixFactorization.py
+|       __init__.py
+|       
+\---verification
+        verify.py
+        __init__.py
+        
