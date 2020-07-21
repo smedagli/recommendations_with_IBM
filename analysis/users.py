@@ -11,7 +11,7 @@ from recommendations_with_IBM.read_data import reader
 u = reader.UserList()
 
 # common kwargs for plots
-hist_args = {'bins': np.arange(0, 100, 5)}
+hist_args = {'bins': np.arange(0, 100, 5), 'rwidth': .7}
 
 
 def _plot_user_histogram(new_figure=0, activities=True, **kwargs):
@@ -36,7 +36,7 @@ def plot_user_activities_histogram(new_figure=0, **kwargs):
     See Also:
         _plot_user_histogram
     """
-    _plot_user_histogram(new_figure, activities=False, **kwargs)
+    _plot_user_histogram(new_figure, activities=True, **kwargs)
 
 
 def plot_user_unique_readings_histogram(new_figure=0, **kwargs):
@@ -44,7 +44,7 @@ def plot_user_unique_readings_histogram(new_figure=0, **kwargs):
     See Also:
         _plot_user_histogram
     """
-    _plot_user_histogram(new_figure, activities=True, **kwargs)
+    _plot_user_histogram(new_figure, activities=False, **kwargs)
 
 
 def plot_article_readings_histogram(new_figure=0, **kwargs):
