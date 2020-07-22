@@ -6,6 +6,51 @@ from itertools import product
 from recommendations_with_IBM.read_data import reader
 
 
+def svd(user_matrix: pd.DataFrame, k: int) -> (np.ndarray, np.ndarray, np.ndarray):
+    """ Performs the singular value decomposition (SVD)
+    Args:
+        user_matrix: shape (M, N); M users, N items
+        k: number of latent features
+    Returns:
+        u: shape (M, M)
+        s: shape (N, N) (default return of svd by numpy is an array with shape (N, 1) )
+        vt: shape (N, N)
+    """
+    u, s, vt = np.linalg.svd(user_matrix)
+    if k >= user_matrix.shape[1]:
+        s_new = np.diag(s)
+        return u, s_new, vt
+    else:
+        u_new = u[:, : k]
+        s_new = np.diag(s[: k])
+        v_new = vt[: k, :]
+        return u_new, s_new, v_new
+
+
+def estimate_from_svd(u: np.ndarray, s: np.ndarray, vt: np.ndarray) -> np.ndarray:
+    """ Performs the estimation from the SVD components
+    Args:
+        u: U matrix for SVD
+        s: sigma matrix for SVD (base vectors are sorted from most to least important)
+        vt: V transpose matrix for SVD
+    Returns:
+        estimation of the matrix
+    """
+    return np.around(np.dot(np.dot(u, s), vt))
+
+
+def compute_estimation_error(estimated, actual) -> float:
+    """ Returns the error in estimation
+    Args:
+        estimated: estimated matrix with SVD (estimate_from_SVD)
+        actual: "ground-truth"
+    Returns:
+        the error computed (not normalized)
+    """
+    diffs = np.subtract(actual, estimated)
+    return np.sum(np.sum(np.abs(diffs)))
+
+
 def FunkSVD(user_matrix: pd.DataFrame, latent_features=10, learning_rate=0.0001, iters=100):
     """ This function performs matrix factorization using a basic form of FunkSVD with no regularization
     Args:
