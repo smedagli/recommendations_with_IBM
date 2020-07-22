@@ -194,7 +194,7 @@ class UserList():
         return temp.drop(user_id)
 
 
-    def get_user_recomendations(self, user_id: int, titles=False, n_max=10) -> list:
+    def get_user_recommendations(self, user_id: int, titles=False, n_max=10) -> list:
         """ Returns the list of suggestions for the given user, based on the similarities with other users
         Will sort the other users by similarity and add the articles read by the other users to a list of suggestions.
         Will also remove the articles already read by user_id
@@ -204,14 +204,14 @@ class UserList():
             n_max: maximum number of suggesions
         Returns:
         Examples:
-            >>> UserList().get_user_recomendations(1, n_max=3)
+            >>> UserList().get_user_recommendations(1, n_max=3)
             [15, 390, 1186]
-            >>> UserList().get_user_recomendations(1, n_max=1, titles=True)
+            >>> UserList().get_user_recommendations(1, n_max=1, titles=True)
             ['connect to db2 warehouse on cloud and db2 using scala']
         """
         already_read = self.get_articles_read_by_user_id(1)
         if titles:
-            return list(map(self.get_title_from_article_id, self.get_user_recomendations(user_id, n_max=n_max)))
+            return list(map(self.get_title_from_article_id, self.get_user_recommendations(user_id, n_max=n_max)))
         else:
             similar_users = self.get_most_similar_users(user_id)
             suggestions = []
